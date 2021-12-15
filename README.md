@@ -42,9 +42,12 @@ While I did not get much time to play around with the RNN model parameters, I go
 ![](./1testacc.PNG)
 
 ## Results
-By following the model architecture from Becker et al., the model was able to train successfully, increasing accuracy each epoch. Here are the final graphs for that experiment:
+By following the CNN model architecture from Becker et al., the model was able to train successfully, increasing accuracy each epoch. Here are the final graphs for that experiment:
 ![](./2trainloss.PNG)
 ![](./2testloss.PNG)
 ![](./2testacc.PNG)
+As you can see, after just 20 epochs, the test accuracy increases from 10% to 45%. Note that the original paper trained the model for 50000 epochs, much more than what I had time to train. From the patterns of the loss graphs, it seems the model has not yet reached convergence since the line does not flatten. It is very likely that an even greater accuracy could have been achieved by simply increasing the number of epochs.
+
+The RNN model architecture was not as successful, and I was unable to get it above a 10% accuracy (baseline accuracy). Additionally, each epoch took significancly longer to run, so I was unable to tell if running the model for more epochs would increase the model performance. While I was overall very satisfied with the CNN performance, there is a lot to be improved with the RNN, and I hope to continue exploring ways to train audio signals with RNNs in the future.
 
 ## Video
