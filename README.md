@@ -15,9 +15,21 @@ You can download the AudioMNIST dataset from the Github repository [here](https:
 The link to the paper by Becker et al. can be found [here](https://arxiv.org/abs/1807.03418).
 
 ## Methodology
+### Data preparation
+The original MNIST data provided spectrograms, raw audio signals, speaker names, and labels for each data point. To prepare the data to be fed into the neural network, I reordered the data by splitting it into groups based on the label. Then within each label group, I scrambled the data points, truncated some of them so no audio signal exceeded a length of 8000, and split each group into train and test data. Finally, I scrambled the resulting train and test sets. The train dataset contains approximately 80% of the overall dataset, while the test dataset contains the remaining 20%.
+
 ### AudioNet1 - Convolutional Neural Network
+![Audio net as described in Becker et al.](./audionet.PNG)
+First, I recreated the AudioNet as described in Becker et al. Becker et al. created two different network architectures; one on spectrograms and one on the raw audio signals. The performance of the spectrogram network was slightly better, but I decided to train on the raw audio signal since it seemed more applicable for general use cases.
+
+AudioNet is a convolutional neural network containing nine layers in the following order: conv3-100, conv3-64, conv3-128, conv3-128, conv3-128, conv3-128, conv3-128, FC-1024, FC-512, FC-10. The conv3-100 layer is a convolutional layer with a filter size of 3, 100 output channels, and a stride of 1. Each convolutional layer was followed by a maxpool layer with a kernel size of 2 and stride of 2, and each convolutional layer except for the first was followed by a batchnorm layer. All convolutional and fully connected layer outputs were fed into a ReLU layer.
+
+For model parameters, I used similar parameters as Becker et al. I used stochastic gradient descent with a batch size of 100, a learning rate of 0.0001, and a constant momentum of 0.9. Becker et al. trained their model for 50000 epochs, and decreased the learning rate over time. However, due to reduced time constraints, I only trained my version of AudioNet for 20 epochs without adjusting the learning rate.
+
+For each epoch, I measured the training and test loss, as well as the test accuracy to assess how the model was improving over time. For each batch, I pad the batch elements with zeros so they all have a length of 8000.
 
 ### AudioNet2 - Recurrent Neural Network
+For the recurrent neural network, I created a much smaller architecture.
 
 ## Experiments/Evaluation
 
