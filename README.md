@@ -51,3 +51,4 @@ As you can see, after just 20 epochs, the test accuracy increases from 10% to 45
 The RNN model architecture was not as successful, and I was unable to get it above a 10% accuracy (baseline accuracy). Additionally, each epoch took significancly longer to run, so I was unable to tell if running the model for more epochs would increase the model performance. While I was overall very satisfied with the CNN performance, there is a lot to be improved with the RNN, and I hope to continue exploring ways to train audio signals with RNNs in the future.
 
 ## Video
+!()[./FinalProjectVideo.mp4]
