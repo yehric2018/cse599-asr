@@ -1,2 +1,2 @@
-# cse599-asr
+# Automatic Speech Recognition with AudioMNIST
 Final project for deep learning
