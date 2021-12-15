@@ -8,6 +8,9 @@ For this project, I trained the a convolutional neural network to classify digit
 The goal is to be able to predict words being spoken in real-time. Ideally this would require using a RNN, where variable-length data points can continuously be streamed into the network to produce a prediction. For this project, I will start with a small vocabulary size of 10 words and see if I can create a model that predicts the word being spoken.
 
 ## Related work
+![](./four.png)
+![](./eight.png)
+
 The paper by Becker et al. that created the AudioMNIST dataset already includes a neural network architecture that feeds the entire raw audio signal into the network at once, using an architecture similar to an image classifier to predict which digit from 0-9 is being spoken. They produced a model that takes in the raw audio signals from the AudioMNIST dataset and predicts the spoken digit with over a 90% accuracy.
 
 You can download the AudioMNIST dataset from the Github repository [here](https://github.com/soerenab/AudioMNIST).
@@ -29,12 +32,19 @@ For model parameters, I used similar parameters as Becker et al. I used stochast
 For each epoch, I measured the training and test loss, as well as the test accuracy to assess how the model was improving over time. For each batch, I pad the batch elements with zeros so they all have a length of 8000.
 
 ### AudioNet2 - Recurrent Neural Network
-For the recurrent neural network, I created a much smaller architecture.
+For the recurrent neural network, I created a much smaller architecture. The data is fed into a Gated Recurrent Unit RNN, then it is sent to a fully connected layer. The batch size for this network was 10, and rather than use a fixed sequence length of 8000, I used Pytorch's pad sequence util function since the audio length does not need to be fixed. This pads all the sequences in the batch with 0s at the end so they are all the same length as the longest sequence in the batch.
 
 ## Experiments/Evaluation
+Compared to the CNN (convolutional neural net), the RNN (recurrent neural net) took much longer to train, even with a smaller batch size. The CNN took less than 3 minutes per epoch, while the RNN often took 90 minutes per epoch.
+
+While I did not get much time to play around with the RNN model parameters, I got to attempt adjusting some of the CNN parameters. In particular, the CNN accuracy originally was not increasing, but after adding in batchnorm layers, the CNN began to train well, even if inconsistently. I was able to stabilize the training to prevent overfitting by lowering the learning rate and adding momentum of 0.9 to the optimizer. Here were the results before lowering the learning rate:
+
+![](./1testacc.PNG)
 
 ## Results
-
-## Examples
+By following the model architecture from Becker et al., the model was able to train successfully, increasing accuracy each epoch. Here are the final graphs for that experiment:
+![](./2trainloss.PNG)
+![](./2testloss.PNG)
+![](./2testacc.PNG)
 
 ## Video
